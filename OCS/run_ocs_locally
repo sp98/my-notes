@@ -1,0 +1,65 @@
+Steps to run OCS locally:
+- Update following in common.sh
+DEFAULT_IMAGE_REGISTRY="docker.io"
+DEFAULT_REGISTRY_NAMESPACE="sp1098"
+
+- Run make ocs-operator
+
+- Run sh hack/generate-lastest-csv.sh with correct images.
+  ensure correct OCS opeartor image is appearing in the CSV file - docker.io/sp1098/ocs-operator:latest
+
+
+- Run make ocs-registry  
+  Make sure its your local image like - sp1098/ocs-registry:latest
+
+- Update deploy-with-olm.yaml with this image - sp1098/ocs-registry:latest
+
+
+
+placement:
+    all:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: cluster.ocs.openshift.io/openshift-storage
+              operator: Exists
+      tolerations:
+      - effect: NoSchedule
+        key: node.ocs.openshift.io/storage
+        operator: Equal
+        value: "true"
+    mon:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - rook-ceph-mon
+            topologyKey: failure-domain.beta.kubernetes.io/zone
+          weight: 100
+
+
+
+ placement:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: cluster.ocs.openshift.io/openshift-storage
+              operator: Exists
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - rook-ceph-mds
+            topologyKey: failure-domain.beta.kubernetes.io/zone
+          weight: 100
+

@@ -1,0 +1,53 @@
+MOM: 
+
+
+OCS doesn't have an upstream or community! Making sure the CI properly generates the CSV and does not look to compare the hash file. 
+gorepobrancher go tool. 
+
+JIRA link: 
+https://issues.redhat.com/secure/RapidBoard.jspa?rapidView=5436&projectKey=RHSTOR&view=planning&selectedIssue=RHSTOR-979
+
+
+972 AND 973 depends on 974 to complete.
+
+Removing the CSV check from Unit test that generates the hash check and compare it. 
+
+Operator bundles. 
+
+
+Gross Income without perk: 1,793,783.00
+
+
+rook_file_system=smoke-test-fs not created. 
+
+app=rook-ceph-mds: not created.
+
+
+
+wget https://downloads.slack-edge.com/linux_releases/slack-4.4.0-0.1.fc21.x86_64.rpm
+
+
+doubts? 
+- what are operators? 
+- 
+
+- cloud native: 
+- Open source 
+- Self healing
+- Self scaling and self managing. 
+
+- what is an operator in general?
+uses custome resources and custom controllers?
+
+mons:
+- explain mons in simple language. 
+- why we need odd numbers?
+- how commmunication happens with mons ?
+
+common.yaml file. Understand the things. 
+
+https://github.com/rook/rook/issues/3893
+
+
+
+Co-authored-by: name <name@example.com>

@@ -1,0 +1,19 @@
+Container notes:
+
+- a away be able to run a process in isolation. 
+- We can run multiple processes inside an OS. Sometimes we want to run a process in a sandbox environment where its not aware of the other processes in the OS
+- Sandboxing a container?
+    -  The container has its own process namespace. 
+    -  the container has cgroups (adding resource limits and certain capabilities)
+
+- Definition: A container is a way to run a process in a sandboxed/isolated environment which can only see the processes running the same container (not those running on the OS)
+              A container is a sandbox for a process. 
+- Typically a container has one main process that is tied to the container lifecyle itself. When this process ends, the container stops. (this is - The container process and the container life cycle are tightly coupled)
+- But we can run other process inside the contianer as well. 
+
+
+
+
+Container Image: 
+- Its similar to a notation of classes in OOP. 
+- An image is like a class or template of something and we can create a number of instances (called containers) out of that image. 

@@ -1,0 +1,71 @@
+Detaching volume
+
+Detatch_from_instance
+
+
+
+
+I tried the steps in `test_detach_attach_worker_volume` test manually: 
+
+1. Detached an EBS volume ( It immediately changed to in-use as soon as it was detached). 
+2. The corresponding OCS operator went to CLBO
+3. Restarted the Node on which the OSD was running (STOP and START).
+4. The OSD came back up and the cluster is healthy. 
+
+
+
+
+------------------------------
+
+1. Multiple OSD on nvme drives because they are high performance drive. 
+
+
+4.5: 
+
+Rook: 1.3 in release 4.5 branch.
+
+https://github.com/rook/rook/pull/4683
+
+https://github.com/rook/rook/pull/5436
+
+
+
+Nimrod Baker. 
+
+
+Query:
+1. Details on WipeDevice - Any documentation. 
+- What all needs to be deleted
+   - Clean the disk on which OSD is running. 
+   - How to identify if the where the OSD is running.
+   - What about OSD on PVs ?
+   - Clean up the devices with - sgdisk --zap-all
+
+Set the flag:
+
+- use the same cleanup job
+- which devices were running OSDs with same FS_ID. 
+- reformated sgdisk. 
+
+devics on PVCs:
+- Det
+- should we still detect it 
+- disk look clean. 
+
+0 wipe the device and 
+
+2. Discuss RGW  
+
+
+
+
+OBs:
+- preservePoolsOnDelete is already. Check if before. 
+
+
+
+Clean uninstall of OBS:
+- User adds a label "yes-really-delete-obs
+- if this label is present, then delete the OBS
+
+

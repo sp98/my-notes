@@ -1,0 +1,39 @@
+LSO: 
+
+Operator SDK:
+Operator SDK version - v0.0.7 
+
+Installation:  
+export RELEASE_VERSION=v0.16.0 
+curl -LO https://github.com/operator-framework/operator-sdk/releases/download/${RELEASE_VERSION}/operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu 
+chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu && sudo mkdir -p /usr/local/bin/ && sudo cp operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu /usr/local/bin/operator-sdk && rm operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu 
+
+Uninstall: 
+- Remove operator-sdk directory from /usr/local/bin
+
+
+
+Basics:
+User guide: https://github.com/operator-framework/operator-sdk/blob/master/doc/user-guide.md
+project layout: https://github.com/operator-framework/operator-sdk/blob/master/doc/project_layout.md
+
+
+Steps: 
+1. Create a new operator-sdk Project: 
+- opeartor-sdk new <project-name>-operator --repo=github.com/sp98/<project-name>-operator
+- --repo is important for go modules. 
+- this command creates a project with following structure: https://github.com/operator-framework/operator-sdk/blob/master/doc/project_layout.md
+
+
+2. The main program of the operator is `cmd/manager/main.go`.
+- Its intialiazes and starts the manager. 
+- manager registers the scheme for all the CRs under pkg/apis/..
+- manager runs all the controllers under pkg/controller/..
+- manager the restirct the namespace that all the controllers will watch for resources. By default, this namespace value will be set using the 'WATCH_NAMESPACE' value in the deploy/operator.yaml
+
+
+3. Add CRD API:
+- operator-sdk add api --api-version=local.storage.openshift.io/v1alpha1 --kind=LocalVolumeDiscovery
+- This will create the resouce API under pkg/apis/cache/v1aplha1/...
+- Then we should modify the spec and status for _types.go file. 
+- And run "operator-sdk generate K8s" to generate the code for that resource type file. 
